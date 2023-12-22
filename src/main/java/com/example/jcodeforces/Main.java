@@ -32,9 +32,13 @@ public class Main extends Application {
 
         String line=reader.readLine();
 
-        System.out.println(line.substring(line.indexOf('[')+1,line.length()-2));
+//      line=line.substring(line.indexOf('[')+1,line.length()-2);
 
-        PrintWriter printer=new PrintWriter("test.json");
+        System.out.println(line);
+
+        PrintWriter printer=new PrintWriter("./src/main/java/test.json");
+        printer.write(line);
+        printer.close();
 
 
 
