@@ -10,6 +10,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 
 
 public class Main extends Application {
@@ -36,11 +42,35 @@ public class Main extends Application {
 
         System.out.println(line);
 
-        PrintWriter printer=new PrintWriter("./src/main/java/test.json");
+        String responseFilePath="./src/main/java/test.json";
+
+        PrintWriter printer=new PrintWriter(responseFilePath);
         printer.write(line);
         printer.close();
 
+        JSONParser jsonParser=new JSONParser();
 
+        FileReader fileReader =new FileReader(responseFilePath);
+
+        Object obj=jsonParser.parse(fileReader);
+        JSONObject responseObj=(JSONObject) obj;
+
+        JSONArray contests=(JSONArray) responseObj.get("result");
+
+//        System.out.print(contests);
+
+        for (int i=0;i<contests.size();i++){
+            JSONObject ithContest=(JSONObject) contests.get(i);
+
+            String contestState=(String) ithContest.get("phase");
+            if(Objects.equals(contestState, "BEFORE")){
+                System.out.println((String) ithContest.get("name") );
+            }
+            else {
+                break;
+            }
+
+        }
 
     }
 }
