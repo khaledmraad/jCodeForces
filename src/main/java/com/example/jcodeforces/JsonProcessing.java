@@ -15,13 +15,13 @@ public class JsonProcessing {
     public JsonProcessing(String filePath) throws Exception{
 
         this.path=filePath;
-        JSONParser jsonParser=new JSONParser();
+        this.jsonParser=new JSONParser();
 
-        FileReader fileReader =new FileReader(filePath);
+        this.fileReader =new FileReader(filePath);
 
     }
 
-    public JSONArray contestsDetails() throws Exception{
+    public JSONArray allContestsDetails() throws Exception{
 
         Object obj=jsonParser.parse(fileReader);
         JSONObject responseObj=(JSONObject) obj;
@@ -29,6 +29,7 @@ public class JsonProcessing {
         return (JSONArray) responseObj.get("result");
 
     }
+
 
 
 

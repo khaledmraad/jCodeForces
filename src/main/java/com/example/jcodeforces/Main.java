@@ -38,8 +38,8 @@ public class Main extends Application {
 
         JsonProcessing jsonReader=new JsonProcessing(CodeForcesGetRequest.responseFilePath);
 
-        JSONArray contests=jsonReader.contestsDetails();
-
+        JSONArray contests=jsonReader.allContestsDetails();
+        System.out.println("lkjsndlckjsndlkcjn");
 //        System.out.print(contests);
 
 
@@ -49,10 +49,15 @@ public class Main extends Application {
             JSONObject ithContest=(JSONObject) contests.get(i);
 
             String contestState=(String) ithContest.get("phase");
+
             if(Objects.equals(contestState, "BEFORE")){
+
                 Label l=new Label((String) ithContest.get("name"));
+
                 textLabel.add(l);
+
                 System.out.println((String) ithContest.get("name") );
+
             }
             else {
                 break;
