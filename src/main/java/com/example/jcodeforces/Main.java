@@ -29,38 +29,16 @@ public class Main extends Application {
         launch(args);
     }
 
-    private static final String contest_API = "https://codeforces.com/api/contest.list?gym=false";
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        URL url = new URL(contest_API);
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        CodeForcesGetRequest.sendRequest();
 
-        connection.setRequestMethod("GET");
+        JsonProcessing jsonReader=new JsonProcessing(CodeForcesGetRequest.responseFilePath);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-        String line=reader.readLine();
-
-//      line=line.substring(line.indexOf('[')+1,line.length()-2);
-
-        System.out.println(line);
-
-        String responseFilePath="./src/main/java/test.json";
-
-        PrintWriter printer=new PrintWriter(responseFilePath);
-        printer.write(line);
-        printer.close();
-
-        JSONParser jsonParser=new JSONParser();
-
-        FileReader fileReader =new FileReader(responseFilePath);
-
-        Object obj=jsonParser.parse(fileReader);
-        JSONObject responseObj=(JSONObject) obj;
-
-        JSONArray contests=(JSONArray) responseObj.get("result");
+        JSONArray contests=jsonReader.contestsDetails();
 
 //        System.out.print(contests);
 
