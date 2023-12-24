@@ -33,19 +33,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-
         CodeForcesGetRequest.sendRequest();
 
         JsonProcessing jsonReader=new JsonProcessing(CodeForcesGetRequest.responseFilePath);
 
         JSONArray contests=jsonReader.allContestsDetails();
-        System.out.println("lkjsndlckjsndlkcjn");
+
 //        System.out.print(contests);
 
 
         Vector<Label> textLabel=new Vector<>();
 
         for (int i=0;i<contests.size();i++){
+
             JSONObject ithContest=(JSONObject) contests.get(i);
 
             String contestState=(String) ithContest.get("phase");
